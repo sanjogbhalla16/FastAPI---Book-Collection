@@ -14,4 +14,4 @@ async def startup():
 async def shutdown():
     await db.disconnect()
     
-app.include_router(user_cred.router)
+app.include_router(user_cred.router, prefix="/user_cred", tags=["user_cred"])

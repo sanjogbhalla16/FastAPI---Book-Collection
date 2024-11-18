@@ -1,8 +1,6 @@
 # here we will create routes for user cred
 #APIRouter class, used to group path operations, for example to structure an app in multiple files. It would then be included in the FastAPI app, or in another APIRouter
-from prisma import Prisma
-from typing import Union
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter,HTTPException
 from schemas import UserCreate , UserResponse
 from models import User
 from hash_pwd import hash_password, verify_password , create_access_token
@@ -23,6 +21,6 @@ async def register(User:UserCreate):
     existing_user = await db.User.find_unique(where={"email":User.email})
     if existing_user:
         raise HTTPException(status_code=400, detail="User already exists")
-    hash_password = hash_password(User.password)
+    hash_pwd = hash_password(User.password)
     user = await db.User.create(data={"username":User.username, "email":User.email, "password":hash_password})
     return user
