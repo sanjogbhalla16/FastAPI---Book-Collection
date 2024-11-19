@@ -3,7 +3,7 @@ from routes import user_cred
 from database import db
 
 app = FastAPI()
-
+#this is basically used to run db on and off
 
 @app.on_event("startup")
 async def startup():
